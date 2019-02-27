@@ -4,7 +4,9 @@
       <h3 class="h6">Popular Posts</h3>
     </header>
     <div class="blog-posts">
-      <a href="#" v-for="post in popular_post " :key="post.id">
+      <div href="#" v-for="post in popular_post " :key="post.id">
+       <router-link :to="{ name: 'post_detail', params: { id: post.id }}">
+      
         <div class="item d-flex align-items-center">
           <div class="image">
             <img :src="post.thumb" alt="..." class="img-fluid">
@@ -23,7 +25,7 @@
             </div>
           </div>
         </div>
-      </a>
+      </div>
     </div>
   </div>
 </template>

@@ -2,7 +2,7 @@
   <div class="container">
     <div class="row">
       <!-- <paginate name="posts" :list="posts" :per="2"> -->
-      <div class="post col-xl-6" v-for="post in posts " :key="post.id">
+      <div class="post col-xl-6" v-for="post in posts.data " :key="post.id">
         <div class="post-thumbnail">
           <router-link :to="{ name: 'post_detail', params: { id: post.id }}">
             <!-- <a href="post.html"> -->
@@ -41,8 +41,8 @@
           </footer>
         </div>
       </div>
-      <!-- </paginate> -->
-      <!-- <paginate-links for="posts"></paginate-links> -->
+
+      <pagination :data="posts" @pagination-change-page="getResults"></pagination>
     </div>
   </div>
 </template>
@@ -51,24 +51,35 @@
 
 <script>
 import axios from "axios";
-import VuePaginate from "vue-paginate";
-import Vue from "vue";
-Vue.use(VuePaginate);
+import pagination from "laravel-vue-pagination";
 
 export default {
   name: "Post",
+
+  components: { pagination },
   data() {
     return {
-      posts: [],
-      paginate: ["posts"]
+      posts: {}
     };
   },
   mounted() {
     console.log("mounted");
-    axios.get("https://fakeblog.bel4.com/api/posts").then(response => {
-      this.posts = response.data.data;
-      console.log(this.posts);
-    });
+    // axios.get("https://fakeblog.bel4.com/api/posts").then(response => {
+    //   this.posts = response.data.data;
+    //   console.log(this.posts);
+    // });
+    this.getResults();
+  },
+  methods: {
+    // Our method to GET results from a Laravel endpoint
+    getResults(page = 1) {
+      axios
+        .get("https://fakeblog.bel4.com/api/posts?page=" + page)
+        .then(response => {
+          this.posts = response.data;
+          console.log(response.data);
+        });
+    }
   }
 };
 </script>
