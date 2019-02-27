@@ -4,7 +4,7 @@
       <div class="col-xl-6" v-for="post in posts " :key="post.id">
         <div class="post-thumbnail">
           <a href="post.html">
-            <img src="post.thumb" alt="..." class="img-fluid">
+            <img :src="post.thumb" alt="..." class="img-fluid">
           </a>
         </div>
         <div class="post-details">
@@ -23,7 +23,7 @@
           <footer class="post-footer d-flex align-items-center">
             <a href="#" class="author d-flex align-items-center flex-wrap">
               <div class="avatar">
-                <img src=" post.author.avatar" alt="..." class="img-fluid">
+                <img :src=" post.author.avatar" alt="..." class="img-fluid">
               </div>
               <div class="title">
                 <span>{{ post.author.name }}</span>
@@ -45,12 +45,13 @@
 
 <script>
 import "@/assets/vendor/bootstrap/css/bootstrap.min.css";
-import "@/assets/vendor/font-awesome/css/font-awesome.min.css";
-import "@/assets/css/fontastic.css";
-import "@/assets/https://fonts.googleapis.com/css?family=Open+Sans:300,400,700";
-import "@/assets/vendor/@fancyapps/fancybox/jquery.fancybox.min.css";
-import "@/assets/css/style.default.cs";
-import "@/assets/vendor/css/custom.css";
+import axios from "axios";
+// import "@/assets/vendor/font-awesome/css/font-awesome.min.css";
+// import "@/assets/css/fontastic.css";
+// import "@/assets/https://fonts.googleapis.com/css?family=Open+Sans:300,400,700";
+// import "@/assets/vendor/@fancyapps/fancybox/jquery.fancybox.min.css";
+// import "@/assets/css/style.default.css";
+// import "@/assets/vendor/css/custom.css";
 
 export default {
   name: "Post",
@@ -60,8 +61,17 @@ export default {
     };
   },
   mounted() {
-    axios.get("https://fakeblog.bel4.com/api/posts").then(function(response) {
-      this.posts.push(response.data.data);
+    console.log("mounted");
+    axios.get("https://fakeblog.bel4.com/api/posts").then(response => {
+      // this.posts = response.data.data;
+      // console.log(response.data.data);
+      // response.data.data.forEach(element => {
+      //   // this.posts.push(element);
+      //   console.log(posts);
+      // });
+      this.posts = response.data.data;
+      console.log(this.posts);
+      // console.log(response.data.data);
     });
   }
 };
