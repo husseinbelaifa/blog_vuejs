@@ -1,22 +1,24 @@
 <template>
   <div class="container">
     <div class="row">
-      <div class="col-xl-6" v-for="post in posts " :key="post.id">
+      <!-- <paginate name="posts" :list="posts" :per="2"> -->
+      <div class="post col-xl-6" v-for="post in posts " :key="post.id">
         <div class="post-thumbnail">
-          <a href="post.html">
+          <router-link :to="{ name: 'post_detail', params: { id: post.id }}">
+            <!-- <a href="post.html"> -->
             <img :src="post.thumb" alt="..." class="img-fluid">
-          </a>
+          </router-link>
         </div>
         <div class="post-details">
           <div class="post-meta d-flex justify-content-between">
             <div class="date meta-last">{{ post.published_at }}</div>
             <div class="category">
-              <a href="#">{{ post.categories }}</a>
+              <!-- <a href="#">{{ post.categories }}</a> -->
             </div>
           </div>
-          <a href="post.html">
+          <router-link :to="{ name: 'post_detail', params: { id: post.id }}">
             <h3 class="h4">{{ post.name }}</h3>
-          </a>
+          </router-link>
           <p
             class="text-muted"
           >Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore.</p>
@@ -39,39 +41,33 @@
           </footer>
         </div>
       </div>
+      <!-- </paginate> -->
+      <!-- <paginate-links for="posts"></paginate-links> -->
     </div>
   </div>
 </template>
 
+ 
+
 <script>
-import "@/assets/vendor/bootstrap/css/bootstrap.min.css";
 import axios from "axios";
-import "@/assets/vendor/font-awesome/css/font-awesome.min.css";
-import "@/assets/css/fontastic.css";
-// import "@/assets/https://fonts.googleapis.com/css?family=Open+Sans:300,400,700";
-// import "@/assets/vendor/@fancyapps/fancybox/jquery.fancybox.min.css";
-import "@/assets/css/style.default.css";
-// import "@/assets/vendor/css/custom.css";
+import VuePaginate from "vue-paginate";
+import Vue from "vue";
+Vue.use(VuePaginate);
 
 export default {
   name: "Post",
   data() {
     return {
-      posts: []
+      posts: [],
+      paginate: ["posts"]
     };
   },
   mounted() {
     console.log("mounted");
     axios.get("https://fakeblog.bel4.com/api/posts").then(response => {
-      // this.posts = response.data.data;
-      // console.log(response.data.data);
-      // response.data.data.forEach(element => {
-      //   // this.posts.push(element);
-      //   console.log(posts);
-      // });
       this.posts = response.data.data;
       console.log(this.posts);
-      // console.log(response.data.data);
     });
   }
 };
