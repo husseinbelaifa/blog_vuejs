@@ -7,6 +7,7 @@ export default new Vuex.Store({
   state: {
     search: "",
     posts: [],
+    comments: [],
     url: ""
   },
   mutations: {
@@ -19,12 +20,16 @@ export default new Vuex.Store({
     },
     change_url(state, url) {
       state.url = url;
+    },
+    change_comment(state, comments) {
+      state.comments = comments;
     }
   },
   actions: {},
   getters: {
     search: state => state.search,
     posts: state => state.posts,
-    url: state => state.url
+    url: state => state.url,
+    comments: state => state.comments
   }
 });

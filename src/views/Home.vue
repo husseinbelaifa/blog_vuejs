@@ -1,19 +1,34 @@
 
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <menu_blog></menu_blog>
+    <page_section></page_section>
+
+    <last></last>
+    <populaire></populaire>
+    <fotter></fotter>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import HelloWorld from "@/components/HelloWorld.vue";
+import fotter from "@/components/Blog/footer.vue";
+import menu_blog from "@/components/Blog/menu.vue";
+import page_section from "@/components/Blog/page_section.vue";
+import last from "@/components/Blog/last_three.vue";
+import populaire from "@/components/Blog/popular_three.vue";
 import axios from "axios";
 export default {
   name: "home",
   components: {
-    HelloWorld
+    fotter,
+    menu_blog,
+    page_section,
+    last,
+    populaire
+    // lastpost,
+    // categories,
+    // tags
   }
 };
 </script>
