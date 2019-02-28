@@ -19,9 +19,10 @@
 import Post from "@/components/Blog/Post.vue";
 import search from "@/components/Blog/search.vue";
 import last_post from "@/components/Blog/last_post.vue";
-import popular_post from "@/components/Blog/last_post.vue";
+import popular_post from "@/components/Blog/popular.vue";
 import categories from "@/components/Blog/categories.vue";
 import tags from "@/components/Blog/tags.vue";
+
 export default {
   name: "Posts",
   components: {

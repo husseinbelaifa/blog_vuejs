@@ -2,7 +2,7 @@
   <div class="container">
     <div class="row">
       <!-- <paginate name="posts" :list="posts" :per="2"> -->
-      <div class="post col-xl-6" v-for="post in posts.data " :key="post.id">
+      <div class="post col-xl-6" v-for="post in $store.state.posts.data " :key="post.id">
         <div class="post-thumbnail">
           <router-link :to="{ name: 'post_detail', params: { id: post.id }}">
             <!-- <a href="post.html"> -->
@@ -42,7 +42,7 @@
         </div>
       </div>
 
-      <pagination :data="posts" @pagination-change-page="getResults"></pagination>
+      <pagination :data="$store.state.posts" :limit="16" @pagination-change-page="getResults"></pagination>
     </div>
   </div>
 </template>
@@ -52,10 +52,10 @@
 <script>
 import axios from "axios";
 import pagination from "laravel-vue-pagination";
-
+import { store } from "@/store.js";
 export default {
   name: "Post",
-
+  store,
   components: { pagination },
   data() {
     return {
@@ -73,12 +73,14 @@ export default {
   methods: {
     // Our method to GET results from a Laravel endpoint
     getResults(page = 1) {
-      axios
-        .get("https://fakeblog.bel4.com/api/posts?page=" + page)
-        .then(response => {
-          this.posts = response.data;
-          console.log(response.data);
-        });
+      let url =
+        this.$store.state.url === ""
+          ? "https://fakeblog.bel4.com/api/posts?page="
+          : this.$store.state.url + "?page=";
+      axios.get(url + page).then(response => {
+        // if (page == 1)
+        this.$store.commit("change_post", response.data);
+      });
     }
   }
 };
