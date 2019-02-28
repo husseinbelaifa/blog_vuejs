@@ -30,7 +30,7 @@
         <!-- Navbar Brand -->
         <div class="navbar-header d-flex align-items-center justify-content-between">
           <!-- Navbar Brand -->
-          <a href="index.html" class="navbar-brand">Bootstrap Blog</a>
+          <router-link to="/" class="navbar-brand">Bootstrap Blog</router-link>
           <!-- Toggle Button-->
           <button
             type="button"
@@ -50,10 +50,13 @@
         <div id="navbarcollapse" class="collapse navbar-collapse">
           <ul class="navbar-nav ml-auto">
             <li class="nav-item">
-              <a href="index.html" class="nav-link">Home</a>
+              <router-link to="/" class="nav-link">Home</router-link>
+              <!-- <a href="index.html" class="nav-link">Home</a> -->
             </li>
             <li class="nav-item">
-              <a href="blog.html" class="nav-link active">Blog</a>
+              <router-link to="/Post" class="nav-link">Blog</router-link>
+
+              <!-- <a href="blog.html" class="nav-link active">Blog</a> -->
             </li>
             <!-- <li class="nav-item">
               <a href="post.html" class="nav-link">Post</a>
